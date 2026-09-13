@@ -7,9 +7,8 @@ class AgentState(TypedDict):
     messages: Annotated[list[BaseMessage], add_messages]
 
     requirement: str
-
     requirements: str
-
     architecture: str
 
     next_step: str
+    review_feedback: str

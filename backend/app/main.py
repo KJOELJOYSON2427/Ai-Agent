@@ -1,42 +1,33 @@
-# from fastapi import FastAPI
-# from pydantic import BaseModel
+from fastapi import FastAPI
+from pydantic import BaseModel
 
-# from app.agents.orchestrator import run_orchestrator
-
-
-# class AgentRequest(BaseModel):
-#     requirement: str
+from app.orchestrator.orchestrator import run_orchestrator
 
 
-# app = FastAPI(title="Software Engineering Agent")
+class AgentRequest(BaseModel):
+    requirement: str
 
 
-
-# @app.get("/")
-# def root():
-#     return {
-#         "message": "Software Engineering Agent is running"
-#     }
+app = FastAPI(title="Software Engineering Agent")
 
 
 
-# @app.post("/agent")
-# def run_agent(request: AgentRequest):
-#     result = run_orchestrator(request.requirement)
-
-#     return {
-#         "requirement": request.requirement,
-#         "response": result
-#     }
+@app.get("/")
+def root():
+    return {
+        "message": "Software Engineering Agent is running"
+    }
 
 
-from app.graph.workflow import graph   
 
-result = graph.invoke({                
-    "messages": [],
-    "requirement": "Build a courier management system",
-    "requirements": ""
-})
-text = result["messages"][-1].content[0]["text"]
+@app.post("/agent")
+def run_agent(request: AgentRequest):
 
-print(text)
+    result = run_orchestrator(request.requirement)
+
+    return {
+        "requirement": request.requirement,
+        "response": result
+    }
+
+
