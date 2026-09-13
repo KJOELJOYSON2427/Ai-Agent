@@ -1,4 +1,5 @@
 from app.graph.workflow import graph
+from app.graph.config import config
 
 
 def run_orchestrator(requirement: str):
@@ -12,6 +13,8 @@ def run_orchestrator(requirement: str):
         "next_step": ""
     }
 
-    result = graph.invoke(initial_state)
+    result = graph.invoke(initial_state,
+
+                          config=config)
 
     return result
