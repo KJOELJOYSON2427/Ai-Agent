@@ -91,3 +91,11 @@ checkpointer = SqliteSaver(
 graph = builder.compile(
     checkpointer=checkpointer
 )
+
+# 2. Method A: Generate and save a high-quality PNG image to your local directory
+try:
+    # Use the built-in output_file_path parameter to save directly
+    graph.get_graph().draw_mermaid_png(output_file_path="workflow_graph.png")
+    print("✅ High-quality visual graph saved as 'workflow_graph.png'!")
+except Exception as e:
+    print(f"⚠️ Could not save PNG (Check your internet or mermaid dependencies): {e}")
